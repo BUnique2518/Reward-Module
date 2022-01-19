@@ -1,0 +1,41 @@
+<?php
+/**
+ * @var Appseconnect\RewardPoints\Block $block
+ */
+$customerId=$block->getcustomerID();
+$order=$block->getOrderlist($customerId);
+?>
+
+<table class="data table" id="show_reward_point">
+    <thead>
+    <tr>
+        <th scope="col" class="col order Id">Order ID</th>
+        <th scope="col" class="col date">Date</th>
+        <th scope="col" class="col point">Point</th>
+        <th scope="col" class="col status">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($order as $order_key => $order_value):
+        $order_id = $order_value->getIncrementId();
+    if($order_value->getState($order_id)=='complete'){ ?>
+    <tr>
+        <td data-th="OrderID" class="col order Id"><?php
+            echo $order_id; ?></td>
+
+        <td data-th="Date" class="col date"><?php
+            echo $order_value->getCreatedAt($order_id); ?> </td>
+
+        <td data-th="Point" class="col point"> <?php
+            $Reward=0;
+            foreach ($order_value->getAllItems($order_id) as $item) {
+                $Reward = $Reward+$item->getProduct()->getData('rp');}
+            echo $Reward; ?></td>
+        <td data-th="Status" class="col status"><?php $order_value->getDiscountAmount($order_id); echo 'Credit'?></td>
+
+    </tr>
+    <?php } endforeach ?>
+    </tbody>
+
+
+</table>

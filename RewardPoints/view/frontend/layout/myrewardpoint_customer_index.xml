@@ -1,0 +1,14 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">My Reward Point</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Appseconnect\RewardPoints\Block\Rewardpoints" name="customer.attribute.value" template="Appseconnect_RewardPoints::mytab.phtml" cacheable="false"/>
+            <block class="Appseconnect\RewardPoints\Block\RewardPointHistory" name="reward.point.value" template="Appseconnect_RewardPoints::rp.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>
